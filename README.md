@@ -62,7 +62,7 @@ elmo-hikes/
 
 ## Contributors
 
-- Thao - BCIT CST Student with a passion for outdoor adventures and food and game.
+- **Thao** - BCIT CST Student with a passion for outdoor adventures and food and game.
 - **Vinh** - I like to go to the beach.
 
 ---
