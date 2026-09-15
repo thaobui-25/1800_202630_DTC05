@@ -61,6 +61,7 @@ elmo-hikes/
 ---
 
 ## Contributors
+- **Tuan Khai Nguyen** - BCIT CST international student from Ho Chi Minh City, Vietnam. I like HTML, CSS, and Python the most!
 
 - **Thao** - BCIT CST Student with a passion for outdoor adventures and food and game.
 - **Vinh** - I like to go to the beach.
