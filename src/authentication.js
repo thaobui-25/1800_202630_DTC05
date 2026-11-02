@@ -80,11 +80,7 @@ export async function signupUser(name, email, password) {
 // Usage:
 //   const user = await signupUser("Alice", "alice@email.com", "secret");
 // -------------------------------------------------------------
-export async function signupUser(name, email, password) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  await updateProfile(userCredential.user, { displayName: name });
-  return userCredential.user;
-}
+
 
 // -------------------------------------------------------------
 // logoutUser()
