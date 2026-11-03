@@ -33,6 +33,10 @@ import {
 // Usage:
 //   await loginUser("user@example.com", "password123");
 // -------------------------------------------------------------
+export async function loginUser(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
+}
+
 
 export async function signupUser(name, email, password) {
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
