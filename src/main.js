@@ -32,6 +32,11 @@ async function displayPairs(user) {
     const outfitsSnap = await getDocs(collection(db, "users", user.uid, "outfits"));
     container.replaceChildren();
 
+    //read this user's favourites (array of outfit IDs) from Firestore
+    currentUid = user.uid;
+    const userSnap = await getDoc(doc(db, "users", user.uid));
+    favourites = userSnap.exists() ? (userSnap.data().favourites || []) : [];
+
     outfitsSnap.forEach((outfitDoc) => {
         const outfit = outfitDoc.data();
         const pieces = outfit.itemIds.map((id) => itemsById[id]).filter(Boolean);
@@ -61,9 +66,64 @@ async function displayPairs(user) {
         body.appendChild(title);
 
         card.append(pair, body);
+
+        // ADDED: heart icon pinned to the top-right of the card
+        card.classList.add("position-relative");                                                              
+        const heartIcon = document.createElement("i");                                                        
+        heartIcon.className = "bi bi-heart fav-btn text-danger position-absolute top-0 end-0 m-2 fs-4";      
+        heartIcon.style.cursor = "pointer";                                                                   
+        card.appendChild(heartIcon);                                                                          
+        setupHeart(card, outfitDoc.id);   
+
         col.appendChild(card);
         container.appendChild(col);
     });
+}
+
+
+// fills the heart if this outfit is already a favourite
+function setupHeart(card, outfitID) {
+
+    //Find the heart icon inside this card
+    const heart = card.querySelector(".fav-btn");
+
+    // Fill the heart.
+    if (favourites.includes(outfitID)) {
+        heart.classList.replace("bi-heart", "bi-heart-fill");
+    }
+
+    // Connect it: "heart, when you are clicked, toggle this outfit"
+    heart.addEventListener("click", function (e) {
+        e.preventDefault();    // the card is an <a>, so don't follow the link
+        e.stopPropagation();
+        toggleFavourite(heart, outfitID);
+    });
+}
+
+// Adds or removes this outfit's ID in the user's favourites array.
+async function toggleFavourite(heart, outfitID) {
+    const userRef = doc(db, "users", currentUid);
+    const isFav = heart.classList.contains("bi-heart-fill");
+
+    try {
+        // [BACK END] merge:true keeps name, email, etc. untouched
+        await setDoc(
+            userRef,
+            { favourites: isFav ? arrayRemove(outfitID) : arrayUnion(outfitID) },
+            { merge: true }
+        );
+
+        // [FRONT END] flip the heart and keep the local list in sync
+        if (isFav) {
+            heart.classList.replace("bi-heart-fill", "bi-heart");
+            favourites = favourites.filter((id) => id !== outfitID);
+        } else {
+            heart.classList.replace("bi-heart", "bi-heart-fill");
+            favourites.push(outfitID);
+        }
+    } catch (error) {
+        console.error("Could not update favourite:", error);
+    }
 }
 
 // Seed the preset once, then display the pairs
