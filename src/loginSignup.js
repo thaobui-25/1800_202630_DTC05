@@ -35,6 +35,7 @@ function initAuthUI() {
     // --- Helper Functions ---
     // Toggle element visibility
     function setVisible(el, visible) {
+        if (!el) return;
         el.classList.toggle('d-none', !visible);
     }
 
@@ -63,6 +64,7 @@ function initAuthUI() {
     // --- Event Listeners ---
     // Toggle buttons
     toSignupBtn?.addEventListener('click', (e) => {
+        if (!signupView) return;
         e.preventDefault();
         hideError();
         setVisible(loginView, false);
@@ -71,6 +73,7 @@ function initAuthUI() {
     });
 
     toLoginBtn?.addEventListener('click', (e) => {
+        if (!loginView) return;
         e.preventDefault();
         hideError();
         setVisible(signupView, false);
