@@ -9,8 +9,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Other libraries go here -->
-
 </head>
 
 <body>
@@ -21,16 +19,31 @@
     <!-- Stuff for body goes here -->
 
     <!-- Start of Hero Section -->
-    <div class="px-4 py-5 text-center bg-success "> <img class="d-block mx-auto mb-4"
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.CTd-5dd5ruxLILxBHNwuzwHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=f7fe23ff04bcb0de4dc786f34a686b304788b5cbfb72c0ad9bbc5d5fe5aaac24&ipo=images"
-            alt="" width="72" height="57">
-        <h1 class="display-5 fw-bold text-body-emphasis"> Your personalized clothing catalog.</h1>
-        <div class="col-lg-6 mx-auto">
-            <p class=" text-white mb-4 ">Lorem ipsum dolor sit amet consectetur.</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+
+    <main class="container py-4" style="max-width: 560px;">
+        <h1>Add a new outfit</h1>
+    
+        <form id="addOutfitForm" novalidate>
+            <div class="mb-3">
+                <label for="outfitNameInput" class="form-label">Outfit's name</label>
+                <input type="text" id="outfitNameInput" class="form-control" placeholder="..." required />
             </div>
-        </div>
-    </div>
+            <div class="mb-3">
+                <label for="cityInput" class="form-label">City</label>
+                <input type="text" id="cityInput" class="form-control" placeholder="..." required />
+            </div>
+            <div class="mb-3">
+                <label for="lengthInput" class="form-label">Length (m)</label>
+                <input type="number" id="lengthInput" class="form-control" step="0.1" min="0" required />
+            </div>
+            <div class="mb-3">
+                <label for="detailsInput" class="form-label">Details</label>
+                <textarea id="detailsInput" class="form-control" rows="3"
+                    placeholder="What makes this outfit special?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Save outfit</button>
+        </form>
+    </main>
     <!-- End of Hero Section -->
 
     <!-- Start of Card section -->
