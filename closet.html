@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Closet</title>
+    <meta name="comp1800 template" content="My 1800 App">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+
+<!-- bottom padding so the fixed nav never covers the last cards -->
+
+<body style="padding-bottom: calc(4rem + env(safe-area-inset-bottom));">
+
+    <!-- Start of Closet section -->
+    <div class="container py-3">
+    
+        <!-- CHANGED: title centred, back button pinned to the left -->
+        <div class="position-relative text-center mb-3">
+            <a href="main.html"
+                class="btn btn-outline-secondary btn-sm px-3 position-absolute start-0 top-50 translate-middle-y"
+                aria-label="Back to main">&lt;</a>
+            <h1 class="h3 mb-0">My Closet</h1>
+        </div>
+    
+        <!-- 2 cards per row on phones, 3 from md, 4 from lg -->
+        <div id="items-go-here" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3"></div>
+    </div>
+    <!-- End of Closet section -->
+
+    <!-- Start of Navbar section -->
+    <nav class="navbar fixed-bottom bg-light border-top p-0"
+        style="padding-bottom: env(safe-area-inset-bottom) !important;">
+        <ul class="nav nav-fill w-100">
+            <li class="nav-item">
+                <a class="nav-link py-3 small text-dark" href="main.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-3 small text-dark" href="#">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-3 small text-dark" href="add.html">Add</a>
+            </li>
+            <li class="nav-item">
+                <!-- Closet is the active page here -->
+                <a class="nav-link py-3 small text-success fw-bold" href="closet.html" aria-current="page">Closet</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-3 small text-dark" href="#">Profile</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- End of Navbar section -->
+
+    <!-- Link to scripts of your own -->
+    <script type="module" src="./src/app.js"></script>
+    <script type="module" src="./src/closet.js"></script>
+
+</body>
+
+</html>

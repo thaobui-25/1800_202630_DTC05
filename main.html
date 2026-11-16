@@ -7,29 +7,31 @@
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CHANGED: viewport-fit=cover lets the bottom nav respect the iPhone home-bar area -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
     <!-- Other libraries go here -->
 
 </head>
 
-<body>
+<!-- CHANGED: bottom padding so the fixed nav never covers the last cards -->
 
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
+<body style="padding-bottom: calc(4rem + env(safe-area-inset-bottom));">
 
     <!-- Start of Hero Section -->
-    <div class="px-4 py-5 text-center bg-success "> <img class="d-block mx-auto mb-4"
+    <!-- CHANGED: smaller padding on phones (px-3 py-4), roomier from md up (py-md-5) -->
+    <div class="px-3 py-4 py-md-5 text-center bg-success max-w">
+        <img class="d-block mx-auto mb-3 mb-md-4"
             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.CTd-5dd5ruxLILxBHNwuzwHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=f7fe23ff04bcb0de4dc786f34a686b304788b5cbfb72c0ad9bbc5d5fe5aaac24&ipo=images"
             alt="" width="72" height="57">
-        <h1 class="display-5 fw-bold text-body-emphasis">Welcome to our catalog, <span id="name-goes-here">friend
-            </span></h1>
+        <!-- CHANGED: display-6 (was display-5) so the welcome line wraps nicely on small screens -->
+        <h1 class="display-6 fw-bold text-body-emphasis">Welcome to our catalog, <span id="name-goes-here">friend</span>
+        </h1>
         <div class="col-lg-6 mx-auto">
-            <p class=" text-white mb-4 ">Lorem ipsum dolor sit amet consectetur.</p>
+            <p class="text-white mb-3 mb-md-4">Lorem ipsum dolor sit amet consectetur.</p>
+            <!-- Stacked full-width buttons on phones, side by side from sm up (already mobile-first) -->
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Browse Clothing</button>
+                <button type="button" class="btn btn-primary btn-lg px-4">Browse Clothing</button>
                 <button type="button" class="btn btn-outline-primary text-white btn-lg px-4">Explore Features</button>
             </div>
         </div>
@@ -37,39 +39,41 @@
     <!-- End of Hero Section -->
 
     <!-- Start of Card section -->
-    <h2 class="my-2 mx-4">Your Outfits</h2>
-    <div id="outfits-go-here" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mx-4 pb-5"></div>
+    <!-- CHANGED: wrapped in a container so it doesn't stretch edge to edge on desktop -->
+    <div class="container">
+        <h2 class="h4 my-3">Your Outfits</h2>
+        <!-- CHANGED: removed mx-4 and pb-5 (the row's own negative margins broke with mx-4).
+             1 column on phones, 2 from sm, 3 from lg -->
+        <div id="outfits-go-here" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3"></div>
+    </div>
     <!-- End of Card section -->
 
     <!-- Start of Navbar section -->
-
-    <nav class="navbar fixed-bottom bg-light border-top">
-        <div class="container-fluid">
-            <ul class="nav w-100 d-flex justify-content-between px-2">
-                <li class="nav-item active flex-fill">
-                    <a class="nav-link text-dark text-center" href="#">Home</a>
-                </li>
-                <li class="nav-item flex-fill">
-                    <a class="nav-link text-dark text-center" href="#">Search</a>
-                </li>
-                <li class="nav-item flex-fill">
-                    <a class="nav-link text-dark text-center" href="#">Add</a>
-                </li>
-                <li class="nav-item flex-fill">
-                    <a class="nav-link text-dark text-center" href="#">Closet</a>
-                </li>
-                <li class="nav-item flex-fill">
-                    <a class="nav-link text-dark text-center" href="#">Profile</a>
-                </li>
-            </ul>
-        </div>
+    <!-- CHANGED: nav-fill spreads the 5 links evenly, py-2 makes bigger tap targets,
+         and the bottom padding clears the iPhone home bar -->
+    <nav class="navbar fixed-bottom bg-light border-top p-0"
+        style="padding-bottom: env(safe-area-inset-bottom) !important;">
+        <ul class="nav nav-fill w-100">
+            <li class="nav-item">
+                <!-- CHANGED: Home is the active page here, with a real link -->
+                <a class="nav-link py-3 small text-success fw-bold" href="main.html" aria-current="page">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-3 small text-dark" href="#">Search</a>
+            </li>
+            <li class="nav-item">
+                <!-- CHANGED: Add is no longer highlighted, since you're on the home page -->
+                <a class="nav-link py-3 small text-dark" href="add.html">Add</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-3 small text-dark" href="closet.html">Closet</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link py-3 small text-dark" href="#">Profile</a>
+            </li>
+        </ul>
     </nav>
-
     <!-- End of Navbar section -->
-
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
     <script type="module" src="./src/app.js"></script>
