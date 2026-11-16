@@ -13,40 +13,39 @@
 
 <body>
 
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
-
-    <!-- Start of Hero Section -->
-
+    <!-- Start of Form Section -->
     <main class="container py-4" style="max-width: 560px;">
-        <h1>Add a new outfit</h1>
-    
-        <form id="addOutfitForm" novalidate>
+        <!-- CHANGED: title centred, back button pinned to the left -->
+        <div class="position-relative text-center mb-3">
+            <a href="main.html"
+                class="btn btn-outline-secondary btn-sm px-3 position-absolute start-0 top-50 translate-middle-y"
+                aria-label="Back to main">&lt;</a>
+            <h1 class="h3 mb-0">Add a clothing item</h1>
+        </div>
+        <form id="addItemForm" novalidate>
             <div class="mb-3">
-                <label for="outfitNameInput" class="form-label">Outfit's name</label>
-                <input type="text" id="outfitNameInput" class="form-control" placeholder="..." required />
+                <label for="itemNameInput" class="form-label">Item name</label>
+                <input type="text" id="itemNameInput" class="form-control" placeholder="e.g. Blue jeans" required />
             </div>
             <div class="mb-3">
-                <label for="cityInput" class="form-label">City</label>
-                <input type="text" id="cityInput" class="form-control" placeholder="..." required />
+                <label for="itemTypeInput" class="form-label">Type</label>
+                <select id="itemTypeInput" class="form-select" required>
+                    <option value="shirt">Shirt</option>
+                    <option value="pants">Pants</option>
+                </select>
             </div>
             <div class="mb-3">
-                <label for="lengthInput" class="form-label">Length (m)</label>
-                <input type="number" id="lengthInput" class="form-control" step="0.1" min="0" required />
+                <label for="colorInput" class="form-label">Color</label>
+                <input type="text" id="colorInput" class="form-control" placeholder="e.g. blue" />
             </div>
             <div class="mb-3">
-                <label for="detailsInput" class="form-label">Details</label>
-                <textarea id="detailsInput" class="form-control" rows="3"
-                    placeholder="What makes this outfit special?"></textarea>
+                <label for="imageUrlInput" class="form-label">Image URL (optional)</label>
+                <input type="url" id="imageUrlInput" class="form-control" placeholder="https://..." />
             </div>
-            <button type="submit" class="btn btn-primary w-100">Save outfit</button>
+            <button type="submit" class="btn btn-primary w-100">Save item</button>
         </form>
     </main>
-    <!-- End of Hero Section -->
-
-    <!-- Start of Card section -->
+    <!-- End of Form Section -->
 
     <!-- Start of Navbar section -->
 
@@ -54,7 +53,7 @@
         <div class="container-fluid">
             <ul class="nav w-100 d-flex justify-content-between px-2">
                 <li class="nav-item active flex-fill">
-                    <a class="nav-link text-dark text-center" href="#">Home</a>
+                    <a class="nav-link text-dark text-center" href="main.html">Home</a>
                 </li>
                 <li class="nav-item flex-fill">
                     <a class="nav-link text-dark text-center" href="#">Search</a>
@@ -63,7 +62,7 @@
                     <a class="nav-link text-success text-center" href="#">Add</a>
                 </li>
                 <li class="nav-item flex-fill">
-                    <a class="nav-link text-dark text-center" href="#">Closet</a>
+                    <a class="nav-link text-dark text-center" href="closet.html">Closet</a>
                 </li>
                 <li class="nav-item flex-fill">
                     <a class="nav-link text-dark text-center" href="#">Profile</a>
@@ -74,13 +73,9 @@
 
     <!-- End of Navbar section -->
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript functions go here    -->
-    <!---------------------------------------------->
-
     <!-- Link to scripts of your own -->
     <script type="module" src="./src/app.js"></script>
-    <script type="module" src="src/add.js"></script>
+    <script type="module" src="./src/add.js"></script>
 
 </body>
 

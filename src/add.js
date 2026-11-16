@@ -1,8 +1,8 @@
 import { db } from "./firebaseConfig.js";
 import { onAuthReady } from "./authentication.js";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";   // CHANGED: doc, getDoc, setDoc instead of collection, addDoc
 
-// Remember the logged-in user so we can save their ID with the hike
+// Remember the logged-in user so we know WHOSE closet to save into
 let currentUser = null;
 
 onAuthReady(function (user) {
@@ -13,29 +13,63 @@ onAuthReady(function (user) {
     currentUser = user;                 // Logged in → remember them
 });
 
+// CHANGED: new helper. "Blue Jeans!" → "blue-jeans"
+function makeItemId(name) {
+    return name
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")    // anything that isn't a letter or number becomes "-"
+        .replace(/^-+|-+$/g, "");       // remove "-" from the start and end
+}
+
 // ---- (1) What to do when the form is submitted ----
-async function saveOutfit(event) {
+async function saveItem(event) {
     event.preventDefault();   // Stop the browser from reloading the page
 
+    // Safety: the form could be submitted before Firebase finishes checking login
+    if (!currentUser) {
+        alert("Still checking your login, try again in a second.");
+        return;
+    }
+
     // 1. Collect the form values into ONE object (this becomes the Firestore document)
-    const newOutfit = {
-        name: document.getElementById("outfitNameInput").value,
-        city: document.getElementById("cityInput").value,
-        length: Number(document.getElementById("lengthInput").value),   // store a number, not "10.5"
-        details: document.getElementById("detailsInput").value,
-        owner: currentUser.uid,                                       // WHO added it
-        ownerName: currentUser.displayName || currentUser.email,
+    const name = document.getElementById("itemNameInput").value.trim();
+    const imageUrl = document.getElementById("imageUrlInput").value.trim();
+
+    // CHANGED: the document ID comes from the name
+    const itemId = makeItemId(name);
+    if (!itemId) {
+        alert("Please enter a name that has letters or numbers in it.");
+        return;
+    }
+
+    const newItem = {
+        name: name,
+        category: document.getElementById("itemTypeInput").value,     // "shirt" or "pants"
+        color: document.getElementById("colorInput").value.trim(),
+        // no image yet? use a placeholder with the item's name on it
+        imageUrl: imageUrl || `https://placehold.co/300x400?text=${encodeURIComponent(name)}`,
         last_updated: serverTimestamp()                               // WHEN it was added
     };
 
-    // 2. Save it to the "hikes" collection
     try {
-        await addDoc(collection(db, "outfit"), newOutfit);
-        location.href = "main.html";    // 3. Go look at the new card
+        // CHANGED: point at users/{uid}/items/{itemId}
+        const itemRef = doc(db, "users", currentUser.uid, "items", itemId);
+
+        // CHANGED: setDoc overwrites, so check whether this name is already taken
+        const existing = await getDoc(itemRef);
+        if (existing.exists()) {
+            const ok = confirm(`"${name}" already exists in your closet. Replace it?`);
+            if (!ok) return;
+        }
+
+        // CHANGED: setDoc with our own ID instead of addDoc with a random one
+        await setDoc(itemRef, newItem);
+        location.href = "main.html";    // 3. Go back to the home page
     } catch (error) {
-        alert(`Error saving hike:\n${error.code || ""}\n${error.message || error}`);
+        alert(`Error saving item:\n${error.code || ""}\n${error.message || error}`);
     }
 }
 
-// ---- (2) Connect it: "form, when you are submitted, run saveHike" ----
-document.getElementById("addOutfitForm").addEventListener("submit", saveOutfit);
+// ---- (2) Connect it: "form, when you are submitted, run saveItem" ----
+document.getElementById("addItemForm").addEventListener("submit", saveItem);
