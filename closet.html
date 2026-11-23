@@ -33,24 +33,32 @@
     <!-- End of Closet section -->
 
     <!-- Start of Navbar section -->
-    <nav class="navbar fixed-bottom bg-light border-top p-0"
-        style="padding-bottom: env(safe-area-inset-bottom) !important;">
-        <ul class="nav nav-fill w-100">
+    <nav class="navbar fixed-bottom bg-light border-top p-0">
+        <ul class="nav nav-justified w-100">
             <li class="nav-item">
-                <a class="nav-link py-3 small text-dark" href="main.html">Home</a>
+                <a class="d-flex flex-column align-items-center nav-link py-3" href="main.html" aria-current="page">
+                    <img class="mh-100 mw-100" src="images/Home.svg">
+                    <span class="text-dark">Home</span>
+                </a>
+            </li>
+    
+            <li class="nav-item">
+                <a class="d-flex flex-column align-items-center nav-link py-3" href="add.html">
+                    <img class="mh-100 mw-100" src="images/Add.svg">
+                    <span class="text-dark">Add</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link py-3 small text-dark" href="#">Search</a>
+                <a class="d-flex flex-column align-items-center nav-link py-3" href="closet.html">
+                    <img class="mh-100 mw-100" src="images/Closet.svg">
+                    <span class="text-success fw-bold">Closet</span>
+                </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link py-3 small text-dark" href="add.html">Add</a>
-            </li>
-            <li class="nav-item">
-                <!-- Closet is the active page here -->
-                <a class="nav-link py-3 small text-success fw-bold" href="closet.html" aria-current="page">Closet</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link py-3 small text-dark" href="profile.html">Profile</a>
+                <a class="d-flex flex-column align-items-center nav-link py-3" href="profile.html">
+                    <img class="mh-100 mw-100" src="images/Profile.svg">
+                    <span class="text-dark">Profile</span>
+                </a>
             </li>
         </ul>
     </nav>
