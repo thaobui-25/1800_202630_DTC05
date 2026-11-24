@@ -2,58 +2,64 @@
 <html lang="en">
 
 <head>
-    <title>My BCIT Project</title>
+    <title>Log in</title>
     <meta name="comp1800 template" content="My 1800 App">
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Web Components for shared navbar and footer layout -->
-    <script type="module" src="/src/components/site-navbar.js"></script>
-    <script type="module" src="/src/components/site-footer.js"></script>
 </head>
 
-<body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
+<!-- CHANGED: bg-success + bg-gradient = green background, min-vh-100 = full screen height,
+     d-flex + align-items-center + justify-content-center = card centred on the screen -->
 
-    <!-- our own navbar goes here -->
-    <site-navbar></site-navbar>
+<body class="bg-success bg-gradient min-vh-100 d-flex flex-column p-3">
 
-    <!-- Main content goes here -->
-    <div class="container py-5" style="max-width: 420px;">
-        <!-- Alerts -->
-        <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
+    <!-- CHANGED: logo and title now sit at the top of the page, outside the card area -->
+    <header class="text-center text-white pt-3 pb-2">
+        <i class="bi bi-handbag display-3"></i>
+        <h1 class="h3 fw-bold mt-2 mb-1">Clo, Your Personalized Catalog</h1>
+        <div class="mb-4 opacity-75"> Log in to see your closet</div>
+    </header>
 
-        <!-- Login -->
-        <div id="loginView">
-            <h3 class="mb-3 text-center">Login</h3>
-            <form id="loginForm" novalidate>
-                <div class="mb-3">
-                    <input type="email" id="loginEmail" class="form-control" placeholder="Email" required />
+    <!-- CHANGED: flex-grow-1 fills the space under the header, and the flex classes centre the card in it -->
+    <main class="flex-grow-1 d-flex align-items-center justify-content-center">
+        <div class="w-100" style="max-width: 420px;">
+            <!-- Message -->
+            
+
+            <!-- White card -->
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-body p-4">
+
+                    <!-- Alerts -->
+                    <div id="authAlert" class="alert alert-danger d-none" role="alert"></div>
+
+                    <!-- Login -->
+                    <div id="loginView">
+                        <form id="loginForm" novalidate>
+                            <div class="mb-3">
+                                <input type="email" id="loginEmail" class="form-control form-control-lg"
+                                    placeholder="Email" autocomplete="email" inputmode="email" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" id="loginPassword" class="form-control form-control-lg"
+                                    placeholder="Password" autocomplete="current-password" required />
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg w-100">Login</button>
+                        </form>
+
+                        <small class="d-block mt-3 text-center">
+                            Don’t have an account?
+                            <a href="signup.html" class="fw-semibold">Sign up</a>
+                        </small>
+                    </div>
+
                 </div>
-                <div class="mb-3">
-                    <input type="password" id="loginPassword" class="form-control" placeholder="Password" required />
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
-            </form>
-            <small class="d-block mt-3 text-center">
-                Don’t have an account?
-                <a href="signup.html" id="toSignup">Sign up</a>
-            </small>
+            </div>
         </div>
-    </div>
-    <!-- our own footer goes here -->
-    <site-footer></site-footer>
-
-    <!---------------------------------------------->
-    <!-- Your own JavaScript scripts go here      -->
-    <!---------------------------------------------->
+    </main>
 
     <script type="module" src="/src/app.js"></script>
-
 
     <!-- Firebase and authentication related scripts -->
     <!-- The order of loading matters -->

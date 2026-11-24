@@ -2,34 +2,55 @@
 <html lang="en">
 
 <head>
-    <title>My BCIT Project</title>
+    <title>Outfit</title>
     <meta name="comp1800 template" content="My 1800 App">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <script type="module" src="/src/components/site-navbar.js"></script>
-    <script type="module" src="/src/components/site-footer.js"></script>
 </head>
 
-<body>
-    <site-navbar></site-navbar>
+<!-- CHANGED: green fills the whole screen, not just the container -->
 
-    <main class="container py-4 text-center">
-        <h1 id="outfitName">Loading...</h1>
+<body class="bg-success bg-gradient min-vh-100">
 
-        <div class="d-flex justify-content-center gap-3 mt-3">
-            <div>
-                <img id="shirtImage" class="img-fluid rounded" style="max-width:200px" src="" alt="Shirt">
-                <p id="shirtName" class="mt-2 mb-0"></p>
+    <main class="container py-4" style="max-width: 560px;">
+
+        <!-- CHANGED: back button on the left, title centred (same header as the closet page) -->
+        <div class="position-relative text-center text-white mb-4">
+            <a href="main.html" class="btn btn-light btn-sm px-3 position-absolute start-0 top-50 translate-middle-y"
+                aria-label="Back to main">&lt;</a>
+            <h1 id="outfitName" class="h3 fw-bold mb-0 px-5">Loading...</h1>
+        </div>
+
+        <!-- CHANGED: two equal columns, one card each -->
+        <div class="row row-cols-2 g-3">
+
+            <div class="col">
+                <div class="card border-0 shadow h-100">
+                    <!-- CHANGED: ratio box = both pictures get the same 3:4 shape -->
+                    <div class="ratio" style="--bs-aspect-ratio: 133.333%;">
+                        <img id="shirtImage" class="object-fit-contain rounded-top" src="" alt="Shirt">
+                    </div>
+                    <div class="card-body p-2 text-center">
+                        <p class="small text-muted mb-0">Shirt</p>
+                        <h2 id="shirtName" class="h6 mb-0"></h2>
+                    </div>
+                </div>
             </div>
-            <div>
-                <img id="pantsImage" class="img-fluid rounded" style="max-width:200px" src="" alt="Pants">
-                <p id="pantsName" class="mt-2 mb-0"></p>
+
+            <div class="col">
+                <div class="card border-0 shadow h-100">
+                    <div class="ratio" style="--bs-aspect-ratio: 133.333%;">
+                        <img id="pantsImage" class="object-fit-contain rounded-top" src="" alt="Pants">
+                    </div>
+                    <div class="card-body p-2 text-center">
+                        <p class="small text-muted mb-0">Pants</p>
+                        <h2 id="pantsName" class="h6 mb-0"></h2>
+                    </div>
+                </div>
             </div>
+
         </div>
     </main>
-
-    <site-footer></site-footer>
 
     <script type="module" src="/src/app.js"></script>
     <script type="module" src="/src/eachClothing.js"></script>
